@@ -273,10 +273,12 @@ phpinstall() {
   echo "systemctl status php81-php-fpm" >/usr/bin/fpm81status ; chmod 700 /usr/bin/fpm81status
   echo "nano -w /etc/opt/remi/php81/php-fpm.d/www.conf" >/usr/bin/fpmconfphp81 ; chmod 700 /usr/bin/fpmconfphp81
   echo "nano -w /usr/local/nginx/conf/php81-remi.conf" >/usr/bin/phpincphp81 ; chmod 700 /usr/bin/phpincphp81
-  cp -a /usr/local/nginx/conf/php.conf /usr/local/nginx/conf/php81-remi.conf
+  cp -a /usr/local/nginx/conf/php-wpsc.conf /usr/local/nginx/conf/php81-remi.conf
   sed -i 's|\[www\]|\[php81-www\]|' /etc/opt/remi/php81/php-fpm.d/www.conf
   sed -i 's|9000|16000|' /etc/opt/remi/php81/php-fpm.d/www.conf
   sed -i 's|9000|16000|' /usr/local/nginx/conf/php81-remi.conf
+  sed -i 's/fastcgi_pass dft_php;/#fastcgi_pass dft_php;/g' /usr/local/nginx/conf/php81-remi.conf
+  sed -i 's/#fastcgi_pass   127.0.0.1/fastcgi_pass   127.0.0.1/g' /usr/local/nginx/conf/php81-remi.conf
   sed -i 's|;listen.backlog = .*|;listen.backlog = 511|' /etc/opt/remi/php81/php-fpm.d/www.conf
   sed -i 's|;listen.owner = .*|listen.owner = nginx|' /etc/opt/remi/php81/php-fpm.d/www.conf
   sed -i 's|;listen.group = .*|listen.group = nginx|' /etc/opt/remi/php81/php-fpm.d/www.conf

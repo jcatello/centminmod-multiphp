@@ -273,10 +273,12 @@ phpinstall() {
   echo "systemctl status php56-php-fpm" >/usr/bin/fpm56status ; chmod 560 /usr/bin/fpm56status
   echo "nano -w /opt/remi/php56/root/etc/php-fpm.d/www.conf" >/usr/bin/fpmconfphp56 ; chmod 560 /usr/bin/fpmconfphp56
   echo "nano -w /usr/local/nginx/conf/php56-remi.conf" >/usr/bin/phpincphp56 ; chmod 560 /usr/bin/phpincphp56
-  cp -a /usr/local/nginx/conf/php.conf /usr/local/nginx/conf/php56-remi.conf
+  cp -a /usr/local/nginx/conf/php-wpsc.conf /usr/local/nginx/conf/php56-remi.conf
   sed -i 's|\[www\]|\[php56-www\]|' /opt/remi/php56/root/etc/php-fpm.d/www.conf
   sed -i 's|9000|9700|' /opt/remi/php56/root/etc/php-fpm.d/www.conf
   sed -i 's|9000|9700|' /usr/local/nginx/conf/php56-remi.conf
+  sed -i 's/fastcgi_pass dft_php;/#fastcgi_pass dft_php;/g' /usr/local/nginx/conf/php56-remi.conf
+  sed -i 's/#fastcgi_pass   127.0.0.1/fastcgi_pass   127.0.0.1/g' /usr/local/nginx/conf/php56-remi.conf
   sed -i 's|;listen.backlog = .*|;listen.backlog = 511|' /opt/remi/php56/root/etc/php-fpm.d/www.conf
   sed -i 's|;listen.owner = .*|listen.owner = nginx|' /opt/remi/php56/root/etc/php-fpm.d/www.conf
   sed -i 's|;listen.group = .*|listen.group = nginx|' /opt/remi/php56/root/etc/php-fpm.d/www.conf
