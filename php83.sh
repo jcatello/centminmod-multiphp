@@ -266,17 +266,17 @@ phpinstall() {
     chmod 0666 /var/opt/remi/php83/log/php-fpm/www-slow.log
     chown nginx:nginx /var/opt/remi/php83/log/php-fpm/www-slow.log
   fi
-  echo "systemctl stop php83-php-fpm" >/usr/bin/fpm82stop ; chmod 700 /usr/bin/fpm82stop
-  echo "systemctl start php83-php-fpm" >/usr/bin/fpm82start ; chmod 700 /usr/bin/fpm82start
-  echo "systemctl restart php83-php-fpm" >/usr/bin/fpm82restart ; chmod 700 /usr/bin/fpm82restart
-  echo "systemctl reload php83-php-fpm" >/usr/bin/fpm82reload ; chmod 700 /usr/bin/fpm82reload
-  echo "systemctl status php83-php-fpm" >/usr/bin/fpm82status ; chmod 700 /usr/bin/fpm82status
+  echo "systemctl stop php83-php-fpm" >/usr/bin/fpm83stop ; chmod 700 /usr/bin/fpm83stop
+  echo "systemctl start php83-php-fpm" >/usr/bin/fpm83start ; chmod 700 /usr/bin/fpm83start
+  echo "systemctl restart php83-php-fpm" >/usr/bin/fpm83restart ; chmod 700 /usr/bin/fpm83restart
+  echo "systemctl reload php83-php-fpm" >/usr/bin/fpm83reload ; chmod 700 /usr/bin/fpm83reload
+  echo "systemctl status php83-php-fpm" >/usr/bin/fpm83status ; chmod 700 /usr/bin/fpm83status
   echo "nano -w /etc/opt/remi/php83/php-fpm.d/www.conf" >/usr/bin/fpmconfphp83 ; chmod 700 /usr/bin/fpmconfphp83
   echo "nano -w /usr/local/nginx/conf/php83-remi.conf" >/usr/bin/phpincphp83 ; chmod 700 /usr/bin/phpincphp83
   cp -a /usr/local/nginx/conf/php-wpsc.conf /usr/local/nginx/conf/php83-remi.conf
   sed -i 's|\[www\]|\[php83-www\]|' /etc/opt/remi/php83/php-fpm.d/www.conf
-  sed -i 's|9000|18000|' /etc/opt/remi/php83/php-fpm.d/www.conf
-  sed -i 's|9000|18000|' /usr/local/nginx/conf/php83-remi.conf
+  sed -i 's|9000|20000|' /etc/opt/remi/php83/php-fpm.d/www.conf
+  sed -i 's|9000|20000|' /usr/local/nginx/conf/php83-remi.conf
   sed -i 's/fastcgi_pass dft_php;/#fastcgi_pass dft_php;/g' /usr/local/nginx/conf/php83-remi.conf
   sed -i 's/#fastcgi_pass   127.0.0.1/fastcgi_pass   127.0.0.1/g' /usr/local/nginx/conf/php83-remi.conf
   sed -i 's|;listen.backlog = .*|;listen.backlog = 511|' /etc/opt/remi/php83/php-fpm.d/www.conf
