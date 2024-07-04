@@ -1,7 +1,7 @@
 #/bin/bash
 ############################################
 # centminmod.com multiple PHP-FPM version
-# installer for PHP 8.2 branch installed
+# installer for PHP 8.3 branch installed
 # side by side concurrently with default
 # centmin mod installed PHP version using
 # using Remi YUM repo's SCL php83 version
