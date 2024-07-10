@@ -59,14 +59,6 @@ if [[ -f /etc/system-release && "$(awk '{print $1,$2,$3}' /etc/system-release)" 
     CENTOS_SIX='6'
 fi
 
-if [[ "$CENTOS_SEVEN" -ne '7' ]]; then
-  echo
-  echo "CentOS 7 Only"
-  echo "aborting..."
-  echo
-  exit
-fi
-
 if [ ! -f /etc/yum.repos.d/remi.repo ]; then
   echo
   echo "Requires Remi Yum Repository"
