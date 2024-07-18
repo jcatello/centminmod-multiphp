@@ -266,6 +266,8 @@ phpinstall() {
   echo "nano -w /etc/opt/remi/php74/php-fpm.d/www.conf" >/usr/bin/fpmconfphp74 ; chmod 700 /usr/bin/fpmconfphp74
   echo "nano -w /usr/local/nginx/conf/php74-remi.conf" >/usr/bin/phpincphp74 ; chmod 700 /usr/bin/phpincphp74
   cp -a /usr/local/nginx/conf/php-wpsc.conf /usr/local/nginx/conf/php74-remi.conf
+  rsync -ah /bigscoots/wpo/phpfpm/templates/php-version-pool.conf.template /etc/opt/remi/php74/php-fpm.d/www.conf
+  sed -i 's|PHPVERSION|php74|' /etc/opt/remi/php74/php-fpm.d/www.conf
   sed -i 's|\[www\]|\[php74-www\]|' /etc/opt/remi/php74/php-fpm.d/www.conf
   sed -i 's|9000|12000|' /etc/opt/remi/php74/php-fpm.d/www.conf
   sed -i 's|9000|12000|' /usr/local/nginx/conf/php74-remi.conf

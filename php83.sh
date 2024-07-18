@@ -266,6 +266,8 @@ phpinstall() {
   echo "nano -w /etc/opt/remi/php83/php-fpm.d/www.conf" >/usr/bin/fpmconfphp83 ; chmod 700 /usr/bin/fpmconfphp83
   echo "nano -w /usr/local/nginx/conf/php83-remi.conf" >/usr/bin/phpincphp83 ; chmod 700 /usr/bin/phpincphp83
   cp -a /usr/local/nginx/conf/php-wpsc.conf /usr/local/nginx/conf/php83-remi.conf
+  rsync -ah /bigscoots/wpo/phpfpm/templates/php-version-pool.conf.template /etc/opt/remi/php83/php-fpm.d/www.conf
+  sed -i 's|PHPVERSION|php83|' /etc/opt/remi/php83/php-fpm.d/www.conf
   sed -i 's|\[www\]|\[php83-www\]|' /etc/opt/remi/php83/php-fpm.d/www.conf
   sed -i 's|9000|20000|' /etc/opt/remi/php83/php-fpm.d/www.conf
   sed -i 's|9000|20000|' /usr/local/nginx/conf/php83-remi.conf

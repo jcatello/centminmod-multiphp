@@ -266,6 +266,8 @@ phpinstall() {
   echo "nano -w /etc/opt/remi/php81/php-fpm.d/www.conf" >/usr/bin/fpmconfphp81 ; chmod 700 /usr/bin/fpmconfphp81
   echo "nano -w /usr/local/nginx/conf/php81-remi.conf" >/usr/bin/phpincphp81 ; chmod 700 /usr/bin/phpincphp81
   cp -a /usr/local/nginx/conf/php-wpsc.conf /usr/local/nginx/conf/php81-remi.conf
+  rsync -ah /bigscoots/wpo/phpfpm/templates/php-version-pool.conf.template /etc/opt/remi/php81/php-fpm.d/www.conf
+  sed -i 's|PHPVERSION|php81|' /etc/opt/remi/php81/php-fpm.d/www.conf
   sed -i 's|\[www\]|\[php81-www\]|' /etc/opt/remi/php81/php-fpm.d/www.conf
   sed -i 's|9000|16000|' /etc/opt/remi/php81/php-fpm.d/www.conf
   sed -i 's|9000|16000|' /usr/local/nginx/conf/php81-remi.conf
