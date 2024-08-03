@@ -273,7 +273,7 @@ phpinstall() {
   echo "systemctl status php56-php-fpm" >/usr/bin/fpm56status ; chmod 560 /usr/bin/fpm56status
   echo "nano -w /opt/remi/php56/root/etc/php-fpm.d/www.conf" >/usr/bin/fpmconfphp56 ; chmod 560 /usr/bin/fpmconfphp56
   echo "nano -w /usr/local/nginx/conf/php56-remi.conf" >/usr/bin/phpincphp56 ; chmod 560 /usr/bin/phpincphp56
-  cp -a /usr/local/nginx/conf/php-wpsc.conf /usr/local/nginx/conf/php56-remi.conf
+  sed "s|fastcgi_param  SERVER_NAME        \$server_name;|fastcgi_param  SERVER_NAME        \$http_host;|" /usr/local/nginx/conf/php.conf > /usr/local/nginx/conf/php56-remi.conf
   sed -i 's|\[www\]|\[php56-www\]|' /opt/remi/php56/root/etc/php-fpm.d/www.conf
   sed -i 's|9000|9700|' /opt/remi/php56/root/etc/php-fpm.d/www.conf
   sed -i 's|9000|9700|' /usr/local/nginx/conf/php56-remi.conf

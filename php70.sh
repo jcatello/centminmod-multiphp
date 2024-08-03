@@ -273,7 +273,7 @@ phpinstall() {
   echo "systemctl status php70-php-fpm" >/usr/bin/fpm70status ; chmod 700 /usr/bin/fpm70status
   echo "nano -w /etc/opt/remi/php70/php-fpm.d/www.conf" >/usr/bin/fpmconfphp70 ; chmod 700 /usr/bin/fpmconfphp70
   echo "nano -w /usr/local/nginx/conf/php70-remi.conf" >/usr/bin/phpincphp70 ; chmod 700 /usr/bin/phpincphp70
-  cp -a /usr/local/nginx/conf/php-wpsc.conf /usr/local/nginx/conf/php70-remi.conf
+  sed "s|fastcgi_param  SERVER_NAME        \$server_name;|fastcgi_param  SERVER_NAME        \$http_host;|" /usr/local/nginx/conf/php.conf > /usr/local/nginx/conf/php70-remi.conf
   sed -i 's|\[www\]|\[php70-www\]|' /etc/opt/remi/php70/php-fpm.d/www.conf
   sed -i 's|9000|9800|' /etc/opt/remi/php70/php-fpm.d/www.conf
   sed -i 's|9000|9800|' /usr/local/nginx/conf/php70-remi.conf
