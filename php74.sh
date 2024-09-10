@@ -269,7 +269,7 @@ phpinstall() {
   echo "systemctl status php74-php-fpm" >/usr/bin/fpm74status ; chmod 700 /usr/bin/fpm74status
   echo "nano -w /etc/opt/remi/php74/php-fpm.d/www.conf" >/usr/bin/fpmconfphp74 ; chmod 700 /usr/bin/fpmconfphp74
   echo "nano -w /usr/local/nginx/conf/php74-remi.conf" >/usr/bin/phpincphp74 ; chmod 700 /usr/bin/phpincphp74
-  cp -a /usr/local/nginx/conf/php-wpsc.conf /usr/local/nginx/conf/php74-remi.conf
+  sed "s|fastcgi_param  SERVER_NAME        \$server_name;|fastcgi_param  SERVER_NAME        \$http_host;|" /usr/local/nginx/conf/php.conf > /usr/local/nginx/conf/php74-remi.conf
   rsync -ah /bigscoots/wpo/phpfpm/templates/php-version-pool.conf.template /etc/opt/remi/php74/php-fpm.d/www.conf
   sed -i 's|PHPVERSION|php74|' /etc/opt/remi/php74/php-fpm.d/www.conf
   sed -i 's|\[www\]|\[php74-www\]|' /etc/opt/remi/php74/php-fpm.d/www.conf
