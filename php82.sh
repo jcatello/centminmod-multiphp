@@ -246,7 +246,11 @@ phpsededit() {
 }
 
 phpinstall() {
-  yum -y install $packages $repoopt
+  if ! yum -y install $packages $repoopt
+  then
+    send_slack_alert "#wpo-alerts" ":warning:" "PHP Install failed" "NA" "Failed at installing yum packages."
+    exit 1
+  fi
   phpsededit
   if [ ! -f /var/opt/remi/php82/log/php-fpm/www-error.log ]; then
     touch /var/opt/remi/php82/log/php-fpm/www-error.log
