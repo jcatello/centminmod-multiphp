@@ -350,8 +350,9 @@ phpinstall() {
   echo "systemctl reload php84-php-fpm" >/usr/bin/fpm84reload ; chmod 700 /usr/bin/fpm84reload
   echo "systemctl status php84-php-fpm" >/usr/bin/fpm84status ; chmod 700 /usr/bin/fpm84status
   echo "nano -w /etc/opt/remi/php84/php-fpm.d/www.conf" >/usr/bin/fpmconfphp84 ; chmod 700 /usr/bin/fpmconfphp84
-  echo "nano -w /usr/local/nginx/conf/php84-remi.conf" >/usr/bin/phpincphp84 ; chmod 700 /usr/bin/phpincphp84
-  cp -a /usr/local/nginx/conf/php.conf /usr/local/nginx/conf/php84-remi.conf
+  echo "nano -w /usr/local/nginx/conf/php84-remi.conf" >/usr/bin/phpincphp84 ; chmod 700 /usr/bin/phpincphp84    sed "s|fastcgi_param  SERVER_NAME        \$server_name;|fastcgi_param  SERVER_NAME        \$http_host;|" /usr/local/nginx/conf/php.conf > /usr/local/nginx/conf/php84-remi.conf
+  rsync -ah /bigscoots/wpo/phpfpm/templates/php-version-pool.conf.template /etc/opt/remi/php84/php-fpm.d/www.conf
+  sed -i 's|PHPVERSION|php84|' /etc/opt/remi/php84/php-fpm.d/www.conf
   sed -i 's|\[www\]|\[php84-www\]|' /etc/opt/remi/php84/php-fpm.d/www.conf
   sed -i 's|9000|22000|' /etc/opt/remi/php84/php-fpm.d/www.conf
   sed -i 's|9000|22000|' /usr/local/nginx/conf/php84-remi.conf
