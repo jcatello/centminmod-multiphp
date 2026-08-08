@@ -227,7 +227,7 @@ phpsededit() {
     echo "always_populate_raw_post_data=-1" >> ${CUSTOMPHPINIFILE}
     if [ ! -f "${CONFIGSCANDIR}/20-opcache.ini" ]; then
       echo "opcache.memory_consumption=$ZOLIMIT" > "${CONFIGSCANDIR}/20-opcache.ini"
-      echo "opcache.interned_strings_buffer=8" >> "${CONFIGSCANDIR}/20-opcache.ini"
+      echo "opcache.interned_strings_buffer=32" >> "${CONFIGSCANDIR}/20-opcache.ini"
       echo "opcache.max_wasted_percentage=5" >> "${CONFIGSCANDIR}/20-opcache.ini"
       echo "opcache.max_accelerated_files=24000" >> "${CONFIGSCANDIR}/20-opcache.ini"
       echo "; http://php.net/manual/en/opcache.configuration.php#ini.opcache.revalidate-freq" >> "${CONFIGSCANDIR}/20-opcache.ini"
